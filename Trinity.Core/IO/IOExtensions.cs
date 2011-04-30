@@ -4,6 +4,7 @@ using System.Diagnostics.Contracts;
 using System.IO;
 using System.Net;
 using System.Text;
+using Mono.GameMath;
 
 namespace Trinity.Core.IO
 {
@@ -226,6 +227,68 @@ namespace Trinity.Core.IO
                 return (ulong)IPAddress.NetworkToHostOrder((long)reader.ReadUInt64());
             }
         }
+
+        #region Vectors
+        public static void WriteVector2(this BinaryWriter writer, Vector2 value)
+        {
+            Contract.Requires(writer != null);
+
+            writer.Write(value.X);
+            writer.Write(value.Y);
+        }
+
+        public static Vector2 ReadVector2(this BinaryReader reader)
+        {
+            Contract.Requires(reader != null);
+
+            var x = reader.ReadSingle();
+            var y = reader.ReadSingle();
+
+            return new Vector2(x, y);
+        }
+
+        public static void WriteVector3(this BinaryWriter writer, Vector3 value)
+        {
+            Contract.Requires(writer != null);
+
+            writer.Write(value.X);
+            writer.Write(value.Y);
+            writer.Write(value.Z);
+        }
+
+        public static Vector3 ReadVector3(this BinaryReader reader)
+        {
+            Contract.Requires(reader != null);
+
+            var x = reader.ReadSingle();
+            var y = reader.ReadSingle();
+            var z = reader.ReadSingle();
+
+            return new Vector3(x, y, z);
+        }
+
+        public static void WriteVector4(this BinaryWriter writer, Vector4 value)
+        {
+            Contract.Requires(writer != null);
+
+            writer.Write(value.X);
+            writer.Write(value.Y);
+            writer.Write(value.Z);
+            writer.Write(value.W);
+        }
+
+        public static Vector4 ReadVector4(this BinaryReader reader)
+        {
+            Contract.Requires(reader != null);
+
+            var x = reader.ReadSingle();
+            var y = reader.ReadSingle();
+            var z = reader.ReadSingle();
+            var w = reader.ReadSingle();
+
+            return new Vector4(x, y, z, w);
+        }
+        #endregion
 
         public static void Pad(this BinaryWriter writer, byte value, int count)
         {
