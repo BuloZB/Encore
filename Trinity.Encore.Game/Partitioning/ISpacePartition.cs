@@ -1,15 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
+using Mono.GameMath;
+using Trinity.Encore.Game.Entities;
+
+
 namespace Trinity.Encore.Game.Partitioning
 {
-    interface ISpacePartition
+    public interface ISpacePartition
     {
-        bool AddEntity(Trinity.Encore.Game.Entities.IWorldEntity entity);
-        System.Collections.Generic.IEnumerable<Trinity.Encore.Game.Entities.IWorldEntity> FindEntities(Func<Trinity.Encore.Game.Entities.IWorldEntity, bool> criteria, Mono.GameMath.BoundingBox searchArea, int maxCount = QuadTree.NoMaxCount);
-        System.Collections.Generic.IEnumerable<Trinity.Encore.Game.Entities.IWorldEntity> FindEntities(Func<Trinity.Encore.Game.Entities.IWorldEntity, bool> criteria, Mono.GameMath.BoundingSphere searchArea, int maxCount = QuadTree.NoMaxCount);
-        System.Collections.Generic.IEnumerable<Trinity.Encore.Game.Entities.IWorldEntity> FindEntities(Func<Trinity.Encore.Game.Entities.IWorldEntity, bool> criteria, int maxCount = QuadTree.NoMaxCount);
-        Trinity.Encore.Game.Entities.IWorldEntity FindEntity(Func<Trinity.Encore.Game.Entities.IWorldEntity, bool> criteria);
-        Trinity.Encore.Game.Entities.IWorldEntity FindEntity(Func<Trinity.Encore.Game.Entities.IWorldEntity, bool> criteria, Mono.GameMath.BoundingBox searchArea);
-        Trinity.Encore.Game.Entities.IWorldEntity FindEntity(Func<Trinity.Encore.Game.Entities.IWorldEntity, bool> criteria, Mono.GameMath.BoundingSphere searchArea);
-        bool RemoveEntity(Trinity.Encore.Game.Entities.IWorldEntity entity);
+        bool AddEntity(IWorldEntity entity);
+        IEnumerable<IWorldEntity> FindEntities(Func<IWorldEntity, bool> criteria, BoundingBox searchArea, int maxCount);
+        IEnumerable<IWorldEntity> FindEntities(Func<IWorldEntity, bool> criteria, BoundingSphere searchArea, int maxCount);
+        IEnumerable<IWorldEntity> FindEntities(Func<IWorldEntity, bool> criteria, int maxCount);
+        IWorldEntity FindEntity(Func<IWorldEntity, bool> criteria);
+        IWorldEntity FindEntity(Func<IWorldEntity, bool> criteria, BoundingBox searchArea);
+        IWorldEntity FindEntity(Func<IWorldEntity, bool> criteria, BoundingSphere searchArea);
+        bool RemoveEntity(IWorldEntity entity);
     }
 }
