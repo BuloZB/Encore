@@ -206,6 +206,8 @@
     <Compile Include="Network\Transmission\IncomingWorldPacket.cs" />
     <Compile Include="Network\Transmission\OutgoingAuthenticationPacket.cs" />
     <Compile Include="Network\Transmission\OutgoingWorldPacket.cs" />
+    <Compile Include="Partitioning\DynamicQuadTree.cs" />
+    <Compile Include="Partitioning\ISpacePartition.cs" />
     <Compile Include="Partitioning\QuadTree.cs" />
     <Compile Include="Partitioning\QuadTreeNode.cs" />
     <Compile Include="Network\WorldOpCode.cs" />
