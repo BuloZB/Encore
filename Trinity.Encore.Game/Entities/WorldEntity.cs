@@ -11,7 +11,7 @@ namespace Trinity.Encore.Game.Entities
             get { throw new NotImplementedException(); }
         }
 
-        public QuadTreeNode Node
+        public ISpacePartition Node
         {
             get { throw new NotImplementedException(); }
             set { throw new NotImplementedException(); }

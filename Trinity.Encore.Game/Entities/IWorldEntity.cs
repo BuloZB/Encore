@@ -12,7 +12,7 @@ namespace Trinity.Encore.Game.Entities
     {
         Vector3 Position { get; }
 
-        QuadTreeNode Node { get; set; }
+        ISpacePartition Node { get; set; }
     }
 
     [ContractClassFor(typeof(IWorldEntity))]
@@ -20,11 +20,11 @@ namespace Trinity.Encore.Game.Entities
     {
         public abstract Vector3 Position { get; }
 
-        public QuadTreeNode Node
+        public ISpacePartition Node
         {
             get
             {
-                Contract.Ensures(Contract.Result<QuadTreeNode>() != null);
+                Contract.Ensures(Contract.Result<ISpacePartition>() != null);
 
                 return null;
             }

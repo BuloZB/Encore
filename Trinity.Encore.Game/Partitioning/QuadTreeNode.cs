@@ -9,7 +9,7 @@ using Trinity.Encore.Game.Entities;
 
 namespace Trinity.Encore.Game.Partitioning
 {
-    public class QuadTreeNode : Actor<QuadTreeNode>
+    public class QuadTreeNode : Actor<QuadTreeNode>, Trinity.Encore.Game.Partitioning.ISpacePartition
     {
         public const float MinNodeLength = 333.0f;
 
