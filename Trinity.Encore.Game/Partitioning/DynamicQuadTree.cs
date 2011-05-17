@@ -15,7 +15,7 @@ namespace Trinity.Encore.Game.Partitioning
         private BoundingBox boundaries;
         private DynamicQuadTree[] childNodes;
         protected DynamicQuadTree parent;
-        private Dictionary<EntityGuid, IWorldEntity> bucket;
+        private List<IWorldEntity> bucket;
 
         // Maximum number of entities before partition splits
         private int partitionThreshold = 35;
@@ -23,11 +23,13 @@ namespace Trinity.Encore.Game.Partitioning
         // In order for node to rebalance, it's children 
         // have to have less than this entities.
         private int balanceThreshold = 20;
+        private int numEntities;
 
-        public int NumEntities { get { return bucket.Count; } }
+        public int NumEntities { public get { return isLeaf ? bucket.Count : numEntities; } private set { } }
         public BoundingBox Boundaries { get { return boundaries; } }
         public float Length { get { return Boundaries.Max.X - Boundaries.Min.X; } }
         public float Width { get { return Boundaries.Max.Y - Boundaries.Min.Y; } }
+        public List<IWorldEntity> Bucket { get { return bucket; } private set { } }
 
         // Clockwise
         private const int NORTH_EAST = 0;
@@ -40,7 +42,8 @@ namespace Trinity.Encore.Game.Partitioning
         {
             boundaries = bounds;
             isLeaf = true;
-            bucket = new Dictionary<EntityGuid, IWorldEntity>();
+            bucket = new List<IWorldEntity>();
+            numEntities = 0;
         }
 
 
@@ -64,12 +67,13 @@ namespace Trinity.Encore.Game.Partitioning
             if (!isLeaf)
             {
                 var node = GetChildContaining(entity);
+                numEntities++;
                 return node.AddEntity(entity);
             }
 
             if (bucket.Count < partitionThreshold)
             {
-                bucket.Add(entity.Guid, entity);
+                bucket.Add(entity);
                 return true;
             }
             else
@@ -127,10 +131,14 @@ namespace Trinity.Encore.Game.Partitioning
 
             isLeaf = false;
 
-            var entities = bucket.Values;
-            bucket = null;
-            foreach (var e in entities)
+            foreach (var e in bucket)
                 AddEntity(e);
+            
+            bucket = null;
+
+            numEntities = 0;
+            foreach (var c in childNodes)
+                numEntities += c.NumEntities;
         }
 
         public IEnumerable<IWorldEntity> FindEntities(Func<IWorldEntity, bool> criteria, BoundingBox searchArea, int maxCount)
@@ -168,7 +176,7 @@ namespace Trinity.Encore.Game.Partitioning
 
             if (isLeaf)
             {
-                bucket.Remove(entity.Guid);
+                bucket.Remove(entity);
                 entity.PostAsync(() => entity.Node = null);
 
                 if (parent != null)
@@ -178,12 +186,22 @@ namespace Trinity.Encore.Game.Partitioning
 
             // Yeah, now we need to check if our children have it, and pass it on
             var node = GetChildContaining(entity);
+            numEntities--;
             return node.RemoveEntity(entity);
         }
 
         public void BalanceIfNeeded()
         {
 
+            if (NumEntities > 20)
+                return;
+
+            var ent = new List<IWorldEntity>();
+            foreach (var c in childNodes)
+                ent.AddRange(c.Bucket);
+            childNodes = null;
+            isLeaf = true;
+            numEntities = 0;
         }
 
     }
