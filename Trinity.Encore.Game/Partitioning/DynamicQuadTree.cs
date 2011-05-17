@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Mono.GameMath;
 using Trinity.Encore.Game.Entities;
 using System.Diagnostics.Contracts;
@@ -25,7 +26,7 @@ namespace Trinity.Encore.Game.Partitioning
         private int balanceThreshold = 20;
         private int numEntities;
 
-        public int NumEntities { public get { return isLeaf ? bucket.Count : numEntities; } private set { } }
+        public int NumEntities { get { return isLeaf ? bucket.Count : numEntities; } private set { } }
         public BoundingBox Boundaries { get { return boundaries; } }
         public float Length { get { return Boundaries.Max.X - Boundaries.Min.X; } }
         public float Width { get { return Boundaries.Max.Y - Boundaries.Min.Y; } }
@@ -141,34 +142,28 @@ namespace Trinity.Encore.Game.Partitioning
                 numEntities += c.NumEntities;
         }
 
-        public IEnumerable<IWorldEntity> FindEntities(Func<IWorldEntity, bool> criteria, BoundingBox searchArea, int maxCount)
+        public IEnumerable<IWorldEntity> FindEntities(Func<IWorldEntity, bool> criteria, BoundingBox searchArea, int maxCount = -1)
         {
-            throw new NotImplementedException();
+            var ret = new List<IWorldEntity>();
+            Search(criteria, ret, x =>  x.Boundaries.Contains(searchArea) != ContainmentType.Disjoint);
+            return ret;
         }
 
-        public IEnumerable<IWorldEntity> FindEntities(Func<IWorldEntity, bool> criteria, BoundingSphere searchArea, int maxCount)
+        public IEnumerable<IWorldEntity> FindEntities(Func<IWorldEntity, bool> criteria, BoundingSphere searchArea, int maxCount = -1)
         {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<IWorldEntity> FindEntities(Func<IWorldEntity, bool> criteria, int maxCount)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IWorldEntity FindEntity(Func<IWorldEntity, bool> criteria)
-        {
-            throw new NotImplementedException();
+            var ret = new List<IWorldEntity>();
+            Search(criteria, ret, x => x.Boundaries.Contains(searchArea) != ContainmentType.Disjoint);
+            return ret;
         }
 
         public IWorldEntity FindEntity(Func<IWorldEntity, bool> criteria, BoundingBox searchArea)
         {
-            throw new NotImplementedException();
+            return FindEntities(criteria, searchArea, 1).SingleOrDefault<IWorldEntity>();
         }
 
         public IWorldEntity FindEntity(Func<IWorldEntity, bool> criteria, BoundingSphere searchArea)
         {
-            throw new NotImplementedException();
+            return FindEntities(criteria, searchArea, 1).SingleOrDefault<IWorldEntity>();
         }
 
         public bool RemoveEntity(IWorldEntity entity)
@@ -193,7 +188,7 @@ namespace Trinity.Encore.Game.Partitioning
         public void BalanceIfNeeded()
         {
 
-            if (NumEntities > 20)
+            if (NumEntities > balanceThreshold)
                 return;
 
             var ent = new List<IWorldEntity>();
@@ -202,6 +197,28 @@ namespace Trinity.Encore.Game.Partitioning
             childNodes = null;
             isLeaf = true;
             numEntities = 0;
+        }
+
+        public void Search(Func<IWorldEntity, bool> criteria, 
+                            ICollection<IWorldEntity> result, 
+                            Func<DynamicQuadTree, bool> inclusionTest,
+                            int maxCount = -1)
+        {
+            Contract.Requires(criteria != null);
+            Contract.Requires(result != null);
+
+            if (isLeaf)
+            {
+                foreach (var e in bucket)
+                    if (criteria(e) && result.Count != maxCount)
+                        result.Add(e);
+            }
+            else
+            {
+                foreach (var n in childNodes)
+                    if (inclusionTest(n))
+                        n.Search(criteria, result, inclusionTest);
+            }
         }
 
     }
