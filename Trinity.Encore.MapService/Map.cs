@@ -99,7 +99,7 @@ namespace Trinity.Encore.MapService
         /// QuadTree-based storage of Entities
         /// TODO: Proper bounds
         /// </summary>
-        private readonly QuadTree _entityQuadTree = new QuadTree(new BoundingBox(new Vector3(MinX, MinY, MinZ), new Vector3(MaxX, MaxY, MaxZ)));
+        private readonly ISpacePartition _entityQuadTree = new QuadTree(new BoundingBox(new Vector3(MinX, MinY, MinZ), new Vector3(MaxX, MaxY, MaxZ)));
 
         /// <summary>
         /// Dictionary-based storage of Entities, for fast guid-based lookup
