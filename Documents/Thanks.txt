@@ -14,6 +14,7 @@ the development of the source base in one way or another:
  * maximus
  * Nayd
  * NoFantasy
+ * Pepsi1x1
  * Phazerz
  * raczman
  * Rat
@@ -22,6 +23,7 @@ the development of the source base in one way or another:
  * Silinoron
  * Socolin
  * Spp
+ * Stryker
  * Supabad
  * [TOM_RUS]
  * vladimir
