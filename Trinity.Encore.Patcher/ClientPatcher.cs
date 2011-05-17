@@ -139,7 +139,7 @@ namespace Trinity.Encore.Patcher
             if (!Patch("Connection index selection", _connectionIndexPattern, new byte[] { 0xB8, 0x00, 0x00, 0x00, 0x00 }))
                 return false;
 
-            if (!Patch("Connection index check", _connectionIndexCheckPattern, new byte[] { 0x90, 0x90, 0x90, 0x90, 0x90 }))
+            if (!Patch("Connection index check", _connectionIndexCheckPattern, new byte[] { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 }))
                 return false;
 
             if (!Patch("Grunt/Battle.net selection", _emailCheckPattern, new byte[] { 0xEB }))
