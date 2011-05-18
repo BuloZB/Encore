@@ -28,7 +28,7 @@ namespace Trinity.Encore.Game.Entities
 
                 return null;
             }
-            set { Contract.Requires(value != null); }
+            set { }
         }
 
         public abstract void Dispose();

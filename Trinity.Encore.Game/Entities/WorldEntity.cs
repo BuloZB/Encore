@@ -6,9 +6,9 @@ namespace Trinity.Encore.Game.Entities
 {
     public abstract class WorldEntity : Entity, IWorldEntity
     {
-        public Vector3 Position
+        public abstract Vector3 Position
         {
-            get { throw new NotImplementedException(); }
+            get;
         }
 
         public ISpacePartition Node
