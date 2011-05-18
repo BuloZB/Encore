@@ -36,6 +36,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Mono.GameMath, Version=0.1.0.0, Culture=neutral, PublicKeyToken=565248a7de28f663, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\Mono.GameMath.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -50,6 +54,18 @@
     <Compile Include="..\Shared\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="MockEntity.cs" />
+    <Compile Include="DynamicQuadTreeTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Trinity.Core\Trinity.Core.csproj">
+      <Project>{78BB9167-FD73-451C-B007-0718DBDF0E14}</Project>
+      <Name>Trinity.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Trinity.Encore.Game\Trinity.Encore.Game.csproj">
+      <Project>{75E460A8-17CF-4005-813A-E1C2E714BDEA}</Project>
+      <Name>Trinity.Encore.Game</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
