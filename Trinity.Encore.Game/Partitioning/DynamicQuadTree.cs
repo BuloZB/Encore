@@ -7,7 +7,7 @@ using System.Diagnostics.Contracts;
 
 namespace Trinity.Encore.Game.Partitioning
 {
-    class DynamicQuadTree : ISpacePartition
+    public class DynamicQuadTree : ISpacePartition
     {
 
         private Boolean isLeaf;
@@ -31,6 +31,20 @@ namespace Trinity.Encore.Game.Partitioning
         public float Length { get { return Boundaries.Max.X - Boundaries.Min.X; } }
         public float Width { get { return Boundaries.Max.Y - Boundaries.Min.Y; } }
         public List<IWorldEntity> Bucket { get { return bucket; } private set { } }
+
+        // These are only here for test suite, 
+        // If you find yourself using them outside of tests you better have a good reason.
+        public bool IsLeaf { get { return isLeaf; } }
+        public int PartitionThreshold { get { return partitionThreshold; } }
+        public int BalanceThreshold { get { return balanceThreshold; } }
+        public DynamicQuadTree[] Children { get { return childNodes; } }
+        public override String ToString()
+        {
+            if (IsLeaf)
+                return string.Format("Leaf, {0} entities in bucket", NumEntities);
+            else
+                return string.Format("Not leaf, {0} entities in childnodes", NumEntities);
+        }
 
         // Clockwise
         private const int NORTH_EAST = 0;
@@ -75,6 +89,7 @@ namespace Trinity.Encore.Game.Partitioning
             if (bucket.Count < partitionThreshold)
             {
                 bucket.Add(entity);
+                entity.PostAsync(() => entity.Node = this);
                 return true;
             }
             else
@@ -196,11 +211,12 @@ namespace Trinity.Encore.Game.Partitioning
                 ent.AddRange(c.Bucket);
             childNodes = null;
             isLeaf = true;
+            bucket = ent;
             numEntities = 0;
         }
 
         public void Search(Func<IWorldEntity, bool> criteria, 
-                            ICollection<IWorldEntity> result, 
+                            List<IWorldEntity> result, 
                             Func<DynamicQuadTree, bool> inclusionTest,
                             int maxCount = -1)
         {
@@ -209,9 +225,7 @@ namespace Trinity.Encore.Game.Partitioning
 
             if (isLeaf)
             {
-                foreach (var e in bucket)
-                    if (criteria(e) && result.Count != maxCount)
-                        result.Add(e);
+                result.AddRange(bucket.Where(criteria));
             }
             else
             {
