@@ -9,7 +9,7 @@ using Trinity.Encore.Game.Entities;
 
 namespace Trinity.Encore.Game.Partitioning
 {
-    public class QuadTreeNode : Actor<QuadTreeNode>, Trinity.Encore.Game.Partitioning.ISpacePartition
+    public class QuadTreeNode : Actor<QuadTreeNode>, ISpacePartition
     {
         public const float MinNodeLength = 333.0f;
 
@@ -54,13 +54,17 @@ namespace Trinity.Encore.Game.Partitioning
 
             if (IsLeaf)
             {
+// ReSharper disable PossibleNullReferenceException
                 _entities.Add(entity.Guid, entity);
+// ReSharper restore PossibleNullReferenceException
                 entity.PostAsync(() => entity.Node = this);
 
                 return true;
             }
 
+// ReSharper disable PossibleNullReferenceException
             var pos = entity.Position;
+// ReSharper restore PossibleNullReferenceException
             for (var i = 0; i < 2; i++)
             {
                 for (var j = 0; j < 2; j++)
@@ -82,13 +86,17 @@ namespace Trinity.Encore.Game.Partitioning
 
             if (IsLeaf)
             {
+// ReSharper disable PossibleNullReferenceException
                 _entities.Remove(entity.Guid);
+// ReSharper restore PossibleNullReferenceException
                 entity.PostAsync(() => entity.Node = null);
 
                 return true;
             }
 
+// ReSharper disable PossibleNullReferenceException
             var pos = entity.Position;
+// ReSharper restore PossibleNullReferenceException
             for (var i = 0; i < 2; i++)
             {
                 for (var j = 0; j < 2; j++)
@@ -168,7 +176,9 @@ namespace Trinity.Encore.Game.Partitioning
 
             if (IsLeaf)
             {
+// ReSharper disable AssignNullToNotNullAttribute
                 results.AddRange(_entities.Values.Where(criteria));
+// ReSharper restore AssignNullToNotNullAttribute
                 return results; // We cannot go any further in this branch of the tree.
             }
 
@@ -252,7 +262,9 @@ namespace Trinity.Encore.Game.Partitioning
                     throw new InvalidOperationException("This node is not a leaf.");
 
                 Contract.Assume(_entities != null);
+// ReSharper disable AssignNullToNotNullAttribute
                 return !_entities.Any();
+// ReSharper restore AssignNullToNotNullAttribute
             }
         }
     }

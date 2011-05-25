@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -13,111 +12,111 @@ namespace Trinity.Encore.Tests.Game
     public class DynamicQuadTreeTest
     {
 
-        private DynamicQuadTree tree;
-        private Random r;
-        private List<IWorldEntity> mockEntities;
+        private DynamicQuadTree _tree;
+        private Random _r;
+        private List<IWorldEntity> _mockEntities;
 
         [TestInitialize]
         public void TestInit()
         {
-            tree = new DynamicQuadTree(new BoundingBox(new Vector3(0, 0, float.MinValue),
+            _tree = new DynamicQuadTree(new BoundingBox(new Vector3(0, 0, float.MinValue),
                                                        new Vector3(100000, 100000, float.MaxValue)));
-            r = new Random();
-            mockEntities = new List<IWorldEntity>();
+            _r = new Random();
+            _mockEntities = new List<IWorldEntity>();
         }
 
         [TestCleanup]
         public void TestCleanup()
         {
-            tree = null;
-            r = null;
-            mockEntities = null;
+            _tree = null;
+            _r = null;
+            _mockEntities = null;
         }
 
         [TestMethod]
-        public void Test_Partitioning()
+        public void TestPartitioning()
         {
-            AddMockEntities(tree.PartitionThreshold + 20);
+            AddMockEntities(_tree.PartitionThreshold + 20);
 
-            Assert.AreEqual(tree.IsLeaf, false, 
+            Assert.AreEqual(_tree.IsLeaf, false, 
                             "After adding more than PartitionThreshold entities, tree should partition");
-            CheckChildrenEntityCount(tree);
+            CheckChildrenEntityCount(_tree);
             AddMockEntities(100);
-            CheckChildrenEntityCount(tree);
+            CheckChildrenEntityCount(_tree);
         }
 
         [TestMethod]
-        public void Test_Entity_Amount_Tracking()
+        public void TestEntityAmountTracking()
         {
             for (int i = 0; i < 200; i++)
             {
                 AddMockEntities(200);
-                CheckChildrenEntityCount(tree);
+                CheckChildrenEntityCount(_tree);
                 RemoveMockEntities(20);
-                CheckChildrenEntityCount(tree);
+                CheckChildrenEntityCount(_tree);
             }
         }
 
         [TestMethod]
-        public void Test_Entity_Searching()
+        public void TestEntitySearching()
         {
             AddMockEntities(50000);
-            var entityToFind = mockEntities.First();
+            var entityToFind = _mockEntities.First();
             var pos = entityToFind.Position;
             var pointMin = new Vector3(pos.X - 100, pos.Y - 100, float.MinValue);
             var pointMax = new Vector3(pos.X + 100, pos.Y + 100, float.MaxValue);
             var searchbound = new BoundingBox(pointMin, pointMax);
-            var res = tree.FindEntities(x => searchbound.Contains(x.Position) == ContainmentType.Contains, searchbound);
+            var res = _tree.FindEntities(x => searchbound.Contains(x.Position) == ContainmentType.Contains, searchbound);
             Assert.AreEqual(true, res.Contains(entityToFind));
         }
 
         [TestMethod]
-        public void Test_Tree_Rebalancing()
+        public void TestTreeRebalancing()
         {
             AddMockEntities(50000);
-            CheckChildrenEntityCount(tree);
+            CheckChildrenEntityCount(_tree);
             RemoveMockEntities(49990);
-            Assert.AreEqual(true, tree.IsLeaf);
+            Assert.AreEqual(true, _tree.IsLeaf);
         }
 
-        private int CheckChildrenEntityCount(DynamicQuadTree node)
+        private static int CheckChildrenEntityCount(DynamicQuadTree node)
         {
-            if(node.IsLeaf)
-                return node.NumEntities;
-            var reportedAmount = node.NumEntities;
-            var calculatedAmount = 0;
-            foreach (var c in node.Children)
-                calculatedAmount += CheckChildrenEntityCount(c);
-
-            Assert.AreEqual(reportedAmount, calculatedAmount);
-            return calculatedAmount;
+            if (!node.IsLeaf)
+            {
+                var reportedAmount = node.NumEntities;
+                var calculatedAmount = node.Children.Sum(c => CheckChildrenEntityCount(c));
+                Assert.AreEqual(reportedAmount, calculatedAmount);
+                return calculatedAmount;
+            }
+            return node.NumEntities;
         }
 
         private void AddMockEntities(int amount)
         {
             var entities = ProduceMockEntities(amount);
-            mockEntities.AddRange(entities);
+            _mockEntities.AddRange(entities);
             foreach (var e in entities)
-                tree.AddEntity(e);
+                _tree.AddEntity(e);
         }
 
         private void RemoveMockEntities(int amount)
         {
-            var entitiesToRemove = new List<IWorldEntity>(mockEntities.Take<IWorldEntity>(amount));
+            var entitiesToRemove = new List<IWorldEntity>(_mockEntities.Take(amount));
 
             foreach (var e in entitiesToRemove)
             {
-                tree.RemoveEntity(e);
-                mockEntities.Remove(e);
+                _tree.RemoveEntity(e);
+                _mockEntities.Remove(e);
             }
         }
         private IEnumerable<IWorldEntity> ProduceMockEntities(int amount)
         {
-            return ProduceMockEntities(tree.Boundaries.Min, tree.Boundaries.Max, amount);
+            return ProduceMockEntities(_tree.Boundaries.Min, _tree.Boundaries.Max, amount);
         }
 
         private IEnumerable<IWorldEntity> ProduceMockEntities(Vector3 min, Vector3 max, int amount)
         {
+            // NOTE: Unused parameters min, max
             var ret = new List<IWorldEntity>();
 
             // The feared arrow operator
@@ -132,7 +131,7 @@ namespace Trinity.Encore.Tests.Game
 
         private float Rand(float min, float max)
         {
-            float val =  (float)r.NextDouble();
+            var val =  (float)_r.NextDouble();
             return (((max - min) * val) + min);
         }
 
@@ -146,7 +145,7 @@ namespace Trinity.Encore.Tests.Game
 
         private Vector3 RandVec3()
         {
-            return RandVec3(tree.Boundaries.Min, tree.Boundaries.Max);
+            return RandVec3(_tree.Boundaries.Min, _tree.Boundaries.Max);
         }
 
     }

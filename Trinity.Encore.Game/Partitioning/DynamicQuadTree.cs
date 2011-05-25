@@ -9,56 +9,52 @@ namespace Trinity.Encore.Game.Partitioning
 {
     public class DynamicQuadTree : ISpacePartition
     {
-
-        private Boolean isLeaf;
+        private Boolean _isLeaf;
 
         // Dimensions of our partition
-        private BoundingBox boundaries;
-        private DynamicQuadTree[] childNodes;
-        protected DynamicQuadTree parent;
-        private List<IWorldEntity> bucket;
+        private readonly BoundingBox _boundaries;
+        private DynamicQuadTree[] _childNodes;
+        protected DynamicQuadTree Parent;
+        private List<IWorldEntity> _bucket;
 
         // Maximum number of entities before partition splits
-        private int partitionThreshold = 35;
+        private readonly int _partitionThreshold = 35;
 
         // In order for node to rebalance, it's children 
         // have to have less than this entities.
-        private int balanceThreshold = 20;
-        private int numEntities;
+        private readonly int _balanceThreshold = 20;
+        private int _numEntities;
 
-        public int NumEntities { get { return isLeaf ? bucket.Count : numEntities; } private set { } }
-        public BoundingBox Boundaries { get { return boundaries; } }
+        public int NumEntities { get { return _isLeaf ? _bucket.Count : _numEntities; } }
+        public BoundingBox Boundaries { get { return _boundaries; } }
         public float Length { get { return Boundaries.Max.X - Boundaries.Min.X; } }
         public float Width { get { return Boundaries.Max.Y - Boundaries.Min.Y; } }
-        public List<IWorldEntity> Bucket { get { return bucket; } private set { } }
+        public List<IWorldEntity> Bucket { get { return _bucket; } }
 
         // These are only here for test suite, 
         // If you find yourself using them outside of tests you better have a good reason.
-        public bool IsLeaf { get { return isLeaf; } }
-        public int PartitionThreshold { get { return partitionThreshold; } }
-        public int BalanceThreshold { get { return balanceThreshold; } }
-        public DynamicQuadTree[] Children { get { return childNodes; } }
+        public bool IsLeaf { get { return _isLeaf; } }
+        public int PartitionThreshold { get { return _partitionThreshold; } }
+        public int BalanceThreshold { get { return _balanceThreshold; } }
+        public DynamicQuadTree[] Children { get { return _childNodes; } }
         public override String ToString()
         {
-            if (IsLeaf)
-                return string.Format("Leaf, {0} entities in bucket", NumEntities);
-            else
-                return string.Format("Not leaf, {0} entities in childnodes", NumEntities);
+            return string.Format(IsLeaf ? "Leaf, {0} entities in bucket" : "Not leaf, {0} entities in childnodes", NumEntities);
         }
 
         // Clockwise
-        private const int NORTH_EAST = 0;
-        private const int SOUTH_EAST = 1;
-        private const int SOUTH_WEST = 2;
-        private const int NORTH_WEST = 3;
-        private const int CHILDREN_SIZE = 4;
+        private const int NorthEast = 0;
+        private const int SouthEast = 1;
+        private const int SouthWest = 2;
+        private const int NorthWest = 3;
+        private const int ChildrenSize = 4;
 
         public DynamicQuadTree(BoundingBox bounds)
         {
-            boundaries = bounds;
-            isLeaf = true;
-            bucket = new List<IWorldEntity>();
-            numEntities = 0;
+            _boundaries = bounds;
+            _isLeaf = true;
+            _bucket = new List<IWorldEntity>();
+            _numEntities = 0;
         }
 
 
@@ -70,8 +66,10 @@ namespace Trinity.Encore.Game.Partitioning
             Contract.Ensures(Contract.Result<DynamicQuadTree>() != null);
 
             DynamicQuadTree node = null;
-            foreach (var child in childNodes)
+            foreach (var child in _childNodes)
+// ReSharper disable PossibleNullReferenceException
                 if (child.Boundaries.Contains(e.Position).Equals(ContainmentType.Contains))
+// ReSharper restore PossibleNullReferenceException
                     node = child;
             return node;
         }
@@ -79,29 +77,27 @@ namespace Trinity.Encore.Game.Partitioning
         public bool AddEntity(IWorldEntity entity)
         {
             
-            if (!isLeaf)
+            if (!_isLeaf)
             {
                 var node = GetChildContaining(entity);
-                numEntities++;
+                _numEntities++;
                 return node.AddEntity(entity);
             }
 
-            if (bucket.Count < partitionThreshold)
+            if (_bucket.Count < _partitionThreshold)
             {
-                bucket.Add(entity);
+                _bucket.Add(entity);
                 entity.PostAsync(() => entity.Node = this);
                 return true;
             }
-            else
-            {
-                Partition();
-                return AddEntity(entity);
-            }
+
+            Partition();
+            return AddEntity(entity);
         }
 
         private void Partition()
         {
-            Contract.Requires(isLeaf);
+            Contract.Requires(_isLeaf);
 
             /* 
              * 
@@ -124,37 +120,37 @@ namespace Trinity.Encore.Game.Partitioning
              * i think she was right.
              */
 
-            var Max = Boundaries.Max;
-            var Min = Boundaries.Min;
-            float HalfX = Boundaries.Min.X + Length / 2;
-            float HalfY = Boundaries.Min.Y + Width / 2;
+            var max = Boundaries.Max;
+            var min = Boundaries.Min;
+            float halfX = Boundaries.Min.X + Length / 2;
+            float halfY = Boundaries.Min.Y + Width / 2;
 
-            childNodes = new DynamicQuadTree[CHILDREN_SIZE];
+            _childNodes = new DynamicQuadTree[ChildrenSize];
 
-            childNodes[NORTH_EAST] = new DynamicQuadTree(new BoundingBox(new Vector3(HalfX,HalfY,float.MinValue),
-                                                                         new Vector3(Max.X,Max.Y,float.MaxValue)));
+            _childNodes[NorthEast] = new DynamicQuadTree(new BoundingBox(new Vector3(halfX,halfY,float.MinValue),
+                                                                         new Vector3(max.X,max.Y,float.MaxValue)));
 
-            childNodes[SOUTH_EAST] = new DynamicQuadTree(new BoundingBox(new Vector3(HalfX, Min.Y, float.MinValue),
-                                                                         new Vector3(Max.X, HalfY, float.MaxValue)));
+            _childNodes[SouthEast] = new DynamicQuadTree(new BoundingBox(new Vector3(halfX, min.Y, float.MinValue),
+                                                                         new Vector3(max.X, halfY, float.MaxValue)));
 
-            childNodes[SOUTH_WEST] = new DynamicQuadTree(new BoundingBox(new Vector3(Min.X, Min.Y, float.MinValue),
-                                                                         new Vector3(HalfX, HalfY, float.MaxValue)));
+            _childNodes[SouthWest] = new DynamicQuadTree(new BoundingBox(new Vector3(min.X, min.Y, float.MinValue),
+                                                                         new Vector3(halfX, halfY, float.MaxValue)));
 
-            childNodes[NORTH_WEST] = new DynamicQuadTree(new BoundingBox(new Vector3(Min.X, HalfY, float.MinValue),
-                                                                         new Vector3(HalfX, Max.Y, float.MaxValue)));
-            foreach (var n in childNodes)
-                n.parent = this;
+            _childNodes[NorthWest] = new DynamicQuadTree(new BoundingBox(new Vector3(min.X, halfY, float.MinValue),
+                                                                         new Vector3(halfX, max.Y, float.MaxValue)));
+            foreach (var n in _childNodes)
+                n.Parent = this;
 
-            isLeaf = false;
+            _isLeaf = false;
 
-            foreach (var e in bucket)
+            foreach (var e in _bucket)
                 AddEntity(e);
             
-            bucket = null;
+            _bucket = null;
 
-            numEntities = 0;
-            foreach (var c in childNodes)
-                numEntities += c.NumEntities;
+            _numEntities = 0;
+            foreach (var c in _childNodes)
+                _numEntities += c.NumEntities;
         }
 
         public IEnumerable<IWorldEntity> FindEntities(Func<IWorldEntity, bool> criteria, BoundingBox searchArea, int maxCount = -1)
@@ -173,46 +169,46 @@ namespace Trinity.Encore.Game.Partitioning
 
         public IWorldEntity FindEntity(Func<IWorldEntity, bool> criteria, BoundingBox searchArea)
         {
-            return FindEntities(criteria, searchArea, 1).SingleOrDefault<IWorldEntity>();
+            return FindEntities(criteria, searchArea, 1).SingleOrDefault();
         }
 
         public IWorldEntity FindEntity(Func<IWorldEntity, bool> criteria, BoundingSphere searchArea)
         {
-            return FindEntities(criteria, searchArea, 1).SingleOrDefault<IWorldEntity>();
+            return FindEntities(criteria, searchArea, 1).SingleOrDefault();
         }
 
         public bool RemoveEntity(IWorldEntity entity)
         {
 
-            if (isLeaf)
+            if (_isLeaf)
             {
-                bucket.Remove(entity);
+                _bucket.Remove(entity);
                 entity.PostAsync(() => entity.Node = null);
 
-                if (parent != null)
-                    parent.BalanceIfNeeded();
+                if (Parent != null)
+                    Parent.BalanceIfNeeded();
                 return true;
             }
 
             // Yeah, now we need to check if our children have it, and pass it on
             var node = GetChildContaining(entity);
-            numEntities--;
+            _numEntities--;
             return node.RemoveEntity(entity);
         }
 
         public void BalanceIfNeeded()
         {
 
-            if (NumEntities > balanceThreshold)
+            if (NumEntities > _balanceThreshold)
                 return;
 
             var ent = new List<IWorldEntity>();
-            foreach (var c in childNodes)
+            foreach (var c in _childNodes)
                 ent.AddRange(c.Bucket);
-            childNodes = null;
-            isLeaf = true;
-            bucket = ent;
-            numEntities = 0;
+            _childNodes = null;
+            _isLeaf = true;
+            _bucket = ent;
+            _numEntities = 0;
         }
 
         public void Search(Func<IWorldEntity, bool> criteria, 
@@ -223,13 +219,17 @@ namespace Trinity.Encore.Game.Partitioning
             Contract.Requires(criteria != null);
             Contract.Requires(result != null);
 
-            if (isLeaf)
+            if (_isLeaf)
             {
-                result.AddRange(bucket.Where(criteria));
+// ReSharper disable PossibleNullReferenceException
+// ReSharper disable AssignNullToNotNullAttribute
+                result.AddRange(_bucket.Where(criteria));
+// ReSharper restore AssignNullToNotNullAttribute
+// ReSharper restore PossibleNullReferenceException
             }
             else
             {
-                foreach (var n in childNodes)
+                foreach (var n in _childNodes)
                     if (inclusionTest(n))
                         n.Search(criteria, result, inclusionTest);
             }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Mono.GameMath;
 using Trinity.Encore.Game.Entities;
 
-
 namespace Trinity.Encore.Game.Partitioning
 {
     public interface ISpacePartition
