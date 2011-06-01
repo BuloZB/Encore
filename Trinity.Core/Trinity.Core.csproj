@@ -80,6 +80,9 @@
     <Reference Include="JetBrains.Annotations">
       <HintPath>..\Dependencies\JetBrains.Annotations.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.GameMath">
+      <HintPath>..\Dependencies\Mono.GameMath.dll</HintPath>
+    </Reference>
     <Reference Include="SevenZip.Lzma">
       <HintPath>..\Dependencies\SevenZip.Lzma.dll</HintPath>
     </Reference>

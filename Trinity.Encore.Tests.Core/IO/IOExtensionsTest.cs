@@ -2,6 +2,7 @@ using System.IO;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Trinity.Core.IO;
+using Mono.GameMath;
 
 namespace Trinity.Encore.Tests.Core.IO
 {
@@ -88,6 +89,28 @@ namespace Trinity.Encore.Tests.Core.IO
             Assert.AreEqual(uint.MaxValue, uintMax);
             Assert.AreEqual(long.MaxValue, longMax);
             Assert.AreEqual(ulong.MaxValue, ulongMax);
+        }
+
+        [TestMethod]
+        public void TestVectors()
+        {
+            var vec2 = new Vector2(float.MaxValue, float.MinValue);
+            var vec3 = new Vector3(float.MaxValue, float.MinValue, float.PositiveInfinity);
+            var vec4 = new Vector4(float.MaxValue, float.MinValue, float.PositiveInfinity, float.NegativeInfinity);
+
+            _writer.WriteVector2(vec2);
+            _writer.WriteVector3(vec3);
+            _writer.WriteVector4(vec4);
+
+            Reset();
+
+            var v2 = _reader.ReadVector2();
+            var v3 = _reader.ReadVector3();
+            var v4 = _reader.ReadVector4();
+
+            Assert.AreEqual(vec2, v2);
+            Assert.AreEqual(vec3, v3);
+            Assert.AreEqual(vec4, v4);
         }
     }
 }
