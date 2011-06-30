@@ -6,7 +6,7 @@ Encore is a scalable server architecture aiming at emulating the World of Warcra
 game servers. It uses an actor-based threading model, and focuses on separating
 logic into services that can be distributed and cooperate across machines. An
 abstract SQL layer is used for databasing (supporting most SQL servers) with support
-for migrations and automatic schema updates. Configurationis done via standard .NET
+for migrations and automatic schema updates. Configuration is done via standard .NET
 XML configuration.
 
 Encore consists of two components: The abstract and fully reusable framework and the
