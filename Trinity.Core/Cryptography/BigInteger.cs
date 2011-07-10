@@ -176,7 +176,7 @@ namespace Trinity.Core.Cryptography
             Contract.Ensures(ByteLength == inData.Length);
 
             inData = (byte[])inData.Clone();
-            inData.Reverse();
+            inData = inData.Reverse().ToArray();
 
             var dataLength = inData.Length >> 2;
 
