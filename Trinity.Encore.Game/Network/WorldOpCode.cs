@@ -1132,5 +1132,15 @@ namespace Trinity.Encore.Game.Network
         ClientCancelTrade = 0x0C2A,
 
         #endregion
+
+        #region Vehicles 
+
+        /// <summary>
+        /// CMSG_EJECT_PASSENGER
+        /// </summary>
+        ClientEjectPassenger = 0x640,
+
+        #endregion
+
     }
 }
