@@ -16,15 +16,15 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
 
         public AreaFlags Flags { get; set; }
 
-        public int Unknown1 { get; set; }
+        public int Unknown1 { get; set; } // SoundProviderPref?
 
-        public int Unknown2 { get; set; }
+        public int Unknown2 { get; set; } // SoundProviderPrefUnderwater?
 
-        public int Unknown3 { get; set; }
+        public int Unknown3 { get; set; } // AmbienceId?
 
-        public int Unknown4 { get; set; }
+        public int ZoneMusic { get; set; } // ZoneMusic.Id
 
-        public int Unknown5 { get; set; }
+        public int IntroMusic { get; set; } // ZoneIntroMusic.Id
 
         public int Level { get; set; }
 
@@ -32,29 +32,31 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
 
         public int Team { get; set; }
 
-        public int Unknown6 { get; set; }
+        public int Unknown6 { get; set; } // LiquidTypeId1?
 
-        public int Unknown7 { get; set; }
+        public int Unknown7 { get; set; } // LiquidTypeId2?
 
-        public int Unknown8 { get; set; }
+        public int Unknown8 { get; set; } // LiquidTypeId3?
 
-        public int Unknown9 { get; set; }
+        public int Unknown9 { get; set; } // LiquidTypeId4?
 
-        public int Unknown10 { get; set; }
+        public int Unknown10 { get; set; } // MinElevation?
 
-        public int Unknown11 { get; set; }
+        public float Unknown11 { get; set; } // AmbientMultiplier?
 
-        public int Unknown12 { get; set; }
+        public int Unknown12 { get; set; } // Always 0, LightId?
 
         public int Unknown13 { get; set; }
 
-        public int Unknown14 { get; set; }
+        public int Unknown14 { get; set; } // Always 0
 
         public int Unknown15 { get; set; }
 
         public int Unknown16 { get; set; }
 
         public int Unknown17 { get; set; }
+
+        public int Unknown18 { get; set; }
 
         [SkipProperty]
         public bool IsSanctuary

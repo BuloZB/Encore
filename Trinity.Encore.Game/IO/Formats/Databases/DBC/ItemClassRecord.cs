@@ -9,7 +9,7 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
 
         public int ClassId { get; set; }
 
-        public int SubClassId { get; set; }     // or InventoryType
+        public int SubclassId { get; set; }     // or InventoryType
 
         public int Unk1 { get; set; }           // Unk, sometimes this >> SubclassID & 1 is checked
 

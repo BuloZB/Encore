@@ -19,6 +19,6 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
 
         public int AreaId6 { get; set; }
 
-        public int NextGroupId { get; set; }
+        public int NextGroupId { get; set; } // In case 6 areas aren't enough
     }
 }

@@ -1,0 +1,31 @@
+﻿using System.Diagnostics.Contracts;
+
+namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
+{
+    [ContractVerification(false)]
+    public sealed class CharacterFacialHairStylesRecord : IClientDbRecord
+    {
+        public int Id { get; set; }
+
+        public int Unknown1 { get; set; }
+
+        public int Gender { get; set; } // 0: Male, 1: Female
+
+        public int SpecificId { get; set; } // Unique per gender, per race (?)
+
+        public GeoSet GeoSetData { get; set; }
+
+        public sealed class GeoSet
+        {
+            public int Field1 { get; set; }
+
+            public int Field2 { get; set; }
+
+            public int Field3 { get; set; }
+
+            public int Field4 { get; set; }
+
+            public int Field5 { get; set; }
+        }
+    }
+}

@@ -8,14 +8,14 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
         // Also inventory type?
         public int Id { get; set; }
 
-        public float Value1 { get; set; }
+        public float ClothModifier { get; set; }
 
-        public float Value2 { get; set; }
+        public float LeatherModifier { get; set; }
 
-        public float Value3 { get; set; }
+        public float ChainModifier { get; set; } // Mail
 
-        public float Value4 { get; set; }
+        public float PlateModifier { get; set; }
 
-        public float Value5 { get; set; }
+        public float Modifier { get; set; }
     }
 }

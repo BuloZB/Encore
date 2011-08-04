@@ -8,7 +8,7 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
     {
         public int Id { get; set; }
 
-        public int FactionId { get; set; }
+        public AchievementFaction Faction { get; set; }
 
         public int MapId { get; set; }
 
@@ -28,7 +28,7 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
 
         public int Icon { get; set; }
 
-        public string Title { get; set; }
+        public string Reward { get; set; }
 
         public int Count { get; set; }
 

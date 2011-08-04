@@ -30,7 +30,7 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
 
         public string Name { get; set; }
 
-        public int MaxGroupSize { get; set; }
+        public int Unknown1 { get; set; }
 
         public int HolidayWorldStateId { get; set; }
 
@@ -38,10 +38,12 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
 
         public int MaxLevel { get; set; }
 
-        public int MaxGroupSizeRated { get; set; }
+        public int MaxGroupSize { get; set; } // ?
 
-        public int MaxPlayers { get; set; }
+        public int MinGroupSize { get; set; } // ?
 
-        public int Rated { get; set; }
+        public int RatedMaxGroupSize { get; set; } // ?
+
+        public int Unknown2 { get; set; } // 2 for Rated BGs, 0 otherwise
     }
 }
