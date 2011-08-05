@@ -194,6 +194,9 @@
     <Compile Include="IO\Formats\Databases\DBC\SpellLevelRecord.cs" />
     <Compile Include="IO\Formats\Databases\DBC\SpellRecord.cs" />
     <Compile Include="IO\Formats\Databases\DBC\SpellScalingRecord.cs" />
+    <Compile Include="IO\Formats\Databases\DBC\WowErrorStringsRecord.cs" />
+    <Compile Include="IO\Formats\Databases\DBC\ZoneIntroMusicTableRecord.cs" />
+    <Compile Include="IO\Formats\Databases\DBC\ZoneLightRecord.cs" />
     <Compile Include="IO\Formats\Databases\DBC\ZoneLightPointRecord.cs" />
     <Compile Include="IO\Formats\Databases\DBC\ZoneMusicRecord.cs" />
     <Compile Include="IO\Formats\M2Reader.cs" />
