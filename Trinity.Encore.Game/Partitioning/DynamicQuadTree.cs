@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Mono.GameMath;
 using Trinity.Encore.Game.Entities;
@@ -39,7 +40,8 @@ namespace Trinity.Encore.Game.Partitioning
         public DynamicQuadTree[] Children { get { return _childNodes; } }
         public override String ToString()
         {
-            return string.Format(IsLeaf ? "Leaf, {0} entities in bucket" : "Not leaf, {0} entities in childnodes", NumEntities);
+            return string.Format(CultureInfo.InvariantCulture,
+                IsLeaf ? "Leaf, {0} entities in bucket" : "Not leaf, {0} entities in childnodes", NumEntities);
         }
 
         // Clockwise

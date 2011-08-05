@@ -3,7 +3,7 @@
 namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
 {
     [ContractVerification(false)]
-    public sealed class CharacterStartOutfitRecord : IClientDbRecord
+    public sealed class CharStartOutfitRecord : IClientDbRecord
     {
         public int Id { get; set; }
 

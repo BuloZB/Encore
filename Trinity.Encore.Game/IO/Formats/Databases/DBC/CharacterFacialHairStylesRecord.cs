@@ -1,15 +1,16 @@
 ﻿using System.Diagnostics.Contracts;
+using Trinity.Encore.Game.Entities.Unit;
 
 namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
 {
     [ContractVerification(false)]
-    public sealed class CharacterFacialHairStylesRecord : IClientDbRecord
+    public sealed class CharacterFacialHairstylesRecord : IClientDbRecord
     {
         public int Id { get; set; }
 
         public int Unknown1 { get; set; }
 
-        public int Gender { get; set; } // 0: Male, 1: Female
+        public Gender Gender { get; set; }
 
         public int SpecificId { get; set; } // Unique per gender, per race (?)
 
