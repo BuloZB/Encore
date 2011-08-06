@@ -128,6 +128,7 @@
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\EntityGuid.cs" />
     <Compile Include="Entities\Unit\Class.cs" />
+    <Compile Include="Entities\Unit\Race.cs" />
     <Compile Include="Entities\Unit\Gender.cs" />
     <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Entities\IWorldEntity.cs" />
@@ -195,7 +196,11 @@
     <Compile Include="IO\Formats\Databases\DBC\ChrRacesRecord.cs" />
     <Compile Include="IO\Formats\Databases\DBC\ChrClassesRecord.cs" />
     <Compile Include="IO\Formats\Databases\DBC\ChrClassesXPowerTypesRecord.cs" />
-    <Compile Include="IO\Formats\Databases\DBC\TemplateRecord.cs" />
+    <Compile Include="IO\Formats\Databases\DBC\CinematicCameraRecord.cs" />
+    <Compile Include="IO\Formats\Databases\DBC\CinematicSequenceRecord.cs" />
+    <Compile Include="IO\Formats\Databases\DBC\CreatureFamilyRecord.cs" />
+    <Compile Include="IO\Formats\Databases\DBC\CreatureDisplayInfoExtraRecord.cs" />
+    <Compile Include="IO\Formats\Databases\DBC\CreatureDisplayInfoRecord.cs" />
     <Compile Include="IO\Formats\Databases\DBC\WorldStateUIRecord.cs" />
     <Compile Include="IO\Formats\Databases\DBC\GTSpellScalingRecord.cs" />
     <Compile Include="IO\Formats\Databases\DBC\ItemClassRecord.cs" />

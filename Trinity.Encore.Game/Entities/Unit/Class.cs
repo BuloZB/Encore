@@ -3,8 +3,11 @@
 namespace Trinity.Encore.Game.Entities.Unit
 {
     [Serializable]
-    public enum Class
+    public enum Class // TODO: Rename
     {
+        // As in ChrClasses.dbc
+
+        None = 0,
         Warrior = 1,
         Paladin = 2,
         Hunter = 3,

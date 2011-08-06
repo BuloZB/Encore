@@ -8,15 +8,15 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
     {
         public int Id { get; set; }
 
-        public int Race { get; set; }
+        public Race Race { get; set; }
 
         public Gender Gender { get; set; }
 
-        public string String { get; set; }
+        public int HairType { get; set; }
+
+        public int Geoset { get; set; }
 
         [RealType(typeof(int))]
-        public bool Boolean { get; set; }
-
-        public float Float { get; set; }
+        public bool IsBald { get; set; }
     }
 }

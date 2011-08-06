@@ -18,7 +18,7 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
 
         public int Unknown2 { get; set; } // Always 0
 
-        public string ClassNameUpperCase { get; set; }
+        public string ClientClassName { get; set; } // Upper cased without spaces
 
         public int SpellClassSet { get; set; } // ?
 
