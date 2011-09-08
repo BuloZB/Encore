@@ -2,7 +2,7 @@
 
 using System;
 
-namespace Trinity.Encore.Game.Entities
+namespace Trinity.Encore.Game.Entities.Unit
 {
     [Serializable]
     public enum PowerType : uint
@@ -11,7 +11,7 @@ namespace Trinity.Encore.Game.Entities
         Rage = 1,
         Focus = 2,
         Energy = 3,
-        Happiness = 4, // byte_F00978, without name
+        Unused = 4, // Was happiness
         Runes = 5,
         RunicPower = 6,
         SoulShards = 7,
