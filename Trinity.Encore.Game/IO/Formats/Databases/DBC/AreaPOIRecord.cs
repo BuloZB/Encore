@@ -5,29 +5,19 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
     [ContractVerification(false)]
     public sealed class AreaPOIRecord : IClientDbRecord
     {
+        // Verified in 14545
+
         public int Id { get; set; }
 
-        public int Icon1 { get; set; }
+        public int Importance { get; set; } // ?
 
-        public int Icon2 { get; set; }
+        public IconSet NormalIconSet { get; set; }
 
-        public int Icon3 { get; set; }
+        public IconSet HordeIconSet { get; set; }
 
-        public int Icon4 { get; set; }
+        public IconSet AllianceIconSet { get; set; }
 
-        public int Icon5 { get; set; }
-
-        public int Icon6 { get; set; }
-
-        public int Icon7 { get; set; }
-
-        public int Icon8 { get; set; }
-
-        public int Icon9 { get; set; }
-
-        public int Icon10 { get; set; }
-
-        public int Icon11 { get; set; }
+        public int FactionTemplateId { get; set; }
 
         public float X { get; set; }
 
@@ -39,14 +29,23 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
 
         public int Zone { get; set; }
 
-        public string Name1 { get; set; }
+        public string Name { get; set; }
 
-        public string Name2 { get; set; }
+        public string Description { get; set; }
 
         public int WorldState { get; set; }
 
-        public float Unknown2 { get; set; }
+        public float Unknown2 { get; set; } // Always 0
 
-        public int Unknown3 { get; set; }
+        public int Unknown3 { get; set; } // 13XX for areas related to Wintergrasp graveyards or 0
+
+        public class IconSet // BG and destructible buildings related
+        {
+            public int Icon100 { get; set; }
+
+            public int Icon50 { get; set; }
+
+            public int Icon0 { get; set; }
+        }
     }
 }
