@@ -5,17 +5,21 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
     [ContractVerification(false)]
     public sealed class AnimKitSegmentRecord : IClientDbRecord
     {
+        // Verified in 14545
+
         public int Id { get; set; }
 
         public int ParentAnimKitId { get; set; }
+
+        public int AnimId { get; set; }
+
+        public int AnimStartTime { get; set; }
 
         public int AnimKitConfigId { get; set; }
 
         public Condition StartCondition { get; set; }
 
         public Condition EndCondition { get; set; }
-
-        public int Unknown1 { get; set; } // mostly values ending in 0, 0-15000,3000000
 
         public float Speed { get; set; }
 
@@ -33,7 +37,7 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
 
             public int Param { get; set; }
 
-            public int Delay { get; set; } // index? 0-10
+            public int Delay { get; set; }
         }
     }
 }
