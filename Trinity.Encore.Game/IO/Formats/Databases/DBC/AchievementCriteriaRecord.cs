@@ -34,8 +34,14 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
         /// </summary>
         public int TimerStartId { get; set; }
 
+        /// <summary>
+        /// Time in seconds for achievements that require "*something* in %i seconds".
+        /// </summary>
         public int TimeLimit { get; set; }
 
+        /// <summary>
+        /// User interface order.
+        /// </summary>
         public int Order { get; set; }
 
         public int Unknown2 { get; set; } // mostly 0; 6000 > x > 3922
