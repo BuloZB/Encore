@@ -204,6 +204,11 @@
     <Compile Include="IO\Formats\Databases\DBC\CreatureFamilyRecord.cs" />
     <Compile Include="IO\Formats\Databases\DBC\CreatureDisplayInfoExtraRecord.cs" />
     <Compile Include="IO\Formats\Databases\DBC\CreatureDisplayInfoRecord.cs" />
+    <Compile Include="IO\Formats\Databases\DBC\CreatureImmunitiesRecord.cs" />
+    <Compile Include="IO\Formats\Databases\DBC\CreatureModelDataRecord.cs" />
+    <Compile Include="IO\Formats\Databases\DBC\CreatureMovementInfoRecord.cs" />
+    <Compile Include="IO\Formats\Databases\DBC\CreatureSoundDataRecord.cs" />
+    <Compile Include="IO\Formats\Databases\DBC\ItemPetFoodRecord.cs" />
     <Compile Include="IO\Formats\Databases\DBC\WorldStateUIRecord.cs" />
     <Compile Include="IO\Formats\Databases\DBC\GTSpellScalingRecord.cs" />
     <Compile Include="IO\Formats\Databases\DBC\ItemClassRecord.cs" />
