@@ -5,6 +5,8 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
     [ContractVerification(false)]
     public sealed class AreaGroupRecord : IClientDbRecord
     {
+        // Verified in 14545
+
         public int Id { get; set; }
 
         public int AreaId1 { get; set; }
@@ -19,6 +21,9 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
 
         public int AreaId6 { get; set; }
 
-        public int NextGroupId { get; set; } // In case 6 areas aren't enough
+        /// <summary>
+        /// AreaGroupId if a group needs more than 6 areas
+        /// </summary>
+        public int NextGroupId { get; set; }
     }
 }

@@ -5,8 +5,9 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
     [ContractVerification(false)]
     public sealed class ArmorLocationRecord : IClientDbRecord
     {
-        // Also inventory type?
-        public int Id { get; set; }
+        // Verified in 14545
+
+        public int Id { get; set; } // Also inventory type?
 
         public float ClothModifier { get; set; }
 

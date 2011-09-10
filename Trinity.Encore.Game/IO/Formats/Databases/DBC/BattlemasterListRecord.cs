@@ -5,6 +5,8 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
     [ContractVerification(false)]
     public sealed class BattlemasterListRecord : IClientDbRecord
     {
+        // Verified in 14545
+
         public int Id { get; set; }
 
         public int Map1 { get; set; }
@@ -42,8 +44,8 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
 
         public int MinGroupSize { get; set; } // ?
 
-        public int RatedMaxGroupSize { get; set; } // ?
+        public int Unknown2 { get; set; } // Related to rated BGs?
 
-        public int Unknown2 { get; set; } // 2 for Rated BGs, 0 otherwise
+        public int Unknown3 { get; set; } // 2 for Rated BGs, 0 otherwise
     }
 }

@@ -6,6 +6,8 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
     [ContractVerification(false)]
     public sealed class BarbershopStyleRecord : IClientDbRecord
     {
+        // Verified in 14545
+
         public int Id { get; set; }
 
         public int Type { get; set; }
@@ -16,7 +18,7 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
 
         public float CostMultiplier { get; set; }
 
-        public int Race { get; set; }
+        public Race Race { get; set; }
 
         public Gender Gender { get; set; }
 

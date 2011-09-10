@@ -1,11 +1,14 @@
 ﻿using System.Diagnostics.Contracts;
-using Trinity.Encore.Game.Entities;
+using Trinity.Encore.Game.Entities.Unit;
+using Trinity.Encore.Game.Spells;
 
 namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
 {
     [ContractVerification(false)]
     public sealed class ChrClassesRecord : IClientDbRecord
     {
+        // Verified in 14545
+
         public int Id { get; set; }
 
         public PowerType Power { get; set; }
@@ -20,9 +23,9 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
 
         public string ClientClassName { get; set; } // Upper cased without spaces
 
-        public int SpellClassSet { get; set; } // ?
+        public SpellFamily SpellClassSet { get; set; }
 
-        public int Flags { get; set; } // TODO: enum: 2 cloth, 4 summonpet, 8 userelicslot, 16 mail, 32 plate..
+        public ClassFlags Flags { get; set; }
 
         public int OpeningCinematicCamera { get; set; } // Only set for DK
 

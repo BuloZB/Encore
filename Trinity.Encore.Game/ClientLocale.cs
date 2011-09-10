@@ -3,7 +3,7 @@ using System;
 namespace Trinity.Encore.Game
 {
     [Serializable]
-    public enum ClientLocale
+    public enum ClientLocale : uint
     {
         English = 0,
         Korean = 1,
@@ -16,5 +16,6 @@ namespace Trinity.Encore.Game
         Russian = 8,
         Japanese = 9,
         BrazilianPortuguese = 10,
+        All = uint.MaxValue
     }
 }

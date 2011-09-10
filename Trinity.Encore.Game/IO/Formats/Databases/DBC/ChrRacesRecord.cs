@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.Contracts;
+using Trinity.Encore.Game.Entities.Unit;
 
 namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
 {
@@ -7,7 +8,7 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
     {
         public int Id { get; set; }
 
-        public int Flags { get; set; }
+        public RaceFlags Flags { get; set; }
 
         public int Faction { get; set; } // FactionTemplate.Id
 
@@ -41,11 +42,13 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
 
         public Customization HairCustomization { get; set; }
 
-        public ClientBoxLevel RequiredeExpansion { get; set; }
+        public ClientBoxLevel RequiredExpansion { get; set; }
 
         public int Unknown2 { get; set; } // 0 for all except 23 for Worgen
 
         public int Unknown3 { get; set; } // 0 for all except 3133 for Gilnean
+
+        public int Unknown4 { get; set; } // 0 for all except 3134 for Gilnean
 
         public sealed class Customization
         {

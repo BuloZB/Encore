@@ -6,12 +6,9 @@ namespace Trinity.Encore.Game.Terrain
     [Serializable]
     public enum AreaFlags : uint
     {
-        /// <summary>
-        /// Snow: Only Dun Morough, Naxxramas, Razorfen Downs (?) and Winterspring.
-        /// </summary>
         Snow = 0x00000001,
         /// <summary>
-        /// Maybe Necropolis?
+        /// Maybe Necropolis? Razorfen Downs, Naxxramas and Acherus: The Ebon Hold
         /// </summary>
         Unknown1 = 0x00000002,
         /// <summary>

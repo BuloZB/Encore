@@ -1,19 +1,18 @@
 ﻿using System.Diagnostics.Contracts;
+using Mono.GameMath;
 
 namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
 {
     [ContractVerification(false)]
     public sealed class AreaTriggerRecord : IClientDbRecord
     {
+        // Verified in 14545
+
         public int Id { get; set; }
 
         public int Map { get; set; }
 
-        public float X { get; set; }
-
-        public float Y { get; set; }
-
-        public float Z { get; set; }
+        public Vector3 Position { get; set; }
 
         public int Unknown1 { get; set; }
 

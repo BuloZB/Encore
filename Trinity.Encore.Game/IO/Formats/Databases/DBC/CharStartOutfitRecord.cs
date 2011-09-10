@@ -1,13 +1,28 @@
 ﻿using System.Diagnostics.Contracts;
+using Trinity.Encore.Game.Entities.Unit;
 
 namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
 {
     [ContractVerification(false)]
     public sealed class CharStartOutfitRecord : IClientDbRecord
     {
+        // Verified in 14545
+        // This DBC has a 'weird' format. "Byte packed DBC Files not supported."
+        // TODO: Verify this structure
+
         public int Id { get; set; }
 
-        public int RaceClassGender { get; set; }
+        // [RealType(typeof(byte))]
+        public Race Race { get; set; }
+
+        // [RealType(typeof(byte))]
+        public Class Class { get; set; }
+
+        // [RealType(typeof(byte))]
+        public Gender Gender { get; set; }
+
+        // [RealType(typeof(byte))]
+        public int Padding { get; set; }
 
         public OutfitData Outfit { get; set; }
 
@@ -18,12 +33,6 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
         public int Unknown1 { get; set; }
 
         public int Unknown2 { get; set; }
-
-        public int Unknown3 { get; set; }
-
-        public int Unknown4 { get; set; }
-
-        public int Unknown5 { get; set; }
 
         public sealed class OutfitData
         {

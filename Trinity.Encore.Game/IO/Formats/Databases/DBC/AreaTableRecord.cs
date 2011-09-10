@@ -6,6 +6,8 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
     [ContractVerification(false)]
     public sealed class AreaTableRecord : IClientDbRecord
     {
+        // Verified in 14545
+
         public int Id { get; set; }
 
         public int MapId { get; set; }
@@ -30,7 +32,7 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
 
         public string Name { get; set; }
 
-        public int Team { get; set; }
+        public int Team { get; set; } // FactionGroupMask?
 
         public int Unknown6 { get; set; } // LiquidTypeId1?
 

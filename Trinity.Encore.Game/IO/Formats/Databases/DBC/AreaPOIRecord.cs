@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.Contracts;
+using Mono.GameMath;
 
 namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
 {
@@ -17,11 +18,9 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
 
         public IconSet AllianceIconSet { get; set; }
 
-        public int FactionTemplateId { get; set; }
+        public int FactionId { get; set; }
 
-        public float X { get; set; }
-
-        public float Y { get; set; }
+        public Vector2 Point { get; set; }
 
         public int Map { get; set; }
 

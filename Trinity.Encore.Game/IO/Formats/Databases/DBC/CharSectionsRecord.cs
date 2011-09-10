@@ -7,9 +7,11 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
     [ContractVerification(false)]
     public sealed class CharSectionsRecord : IClientDbRecord
     {
+        // Verified in 14545
+
         public int Id { get; set; }
 
-        public int Race { get; set; }
+        public Race Race { get; set; }
 
         public Gender Gender { get; set; }
 

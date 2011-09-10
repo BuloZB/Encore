@@ -5,6 +5,8 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
     [ContractVerification(false)]
     public sealed class CameraShakesRecord : IClientDbRecord
     {
+        // Verified 14545
+
         // Use in client: CGCamera::AddShake( vector, shakeType, direction, amplitude*0.027777778, frequency, duration, phase, coefficient );
 
         public int Id { get; set; }

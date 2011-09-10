@@ -5,6 +5,7 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
     [ContractVerification(false)]
     public sealed class CastableRaidBuffsRecord : IClientDbRecord
     {
+        // Verified in 14545
         // Only one entry in this DBC
 
         public int Id { get; set; }
