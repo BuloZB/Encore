@@ -5,6 +5,8 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
     [ContractVerification(false)]
     public sealed class CreatureFamilyRecord : IClientDbRecord
     {
+        // Verified in 14545
+
         public int Id { get; set; }
 
         public float MinScale { get; set; }
@@ -19,7 +21,7 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
 
         public int SkillLine2 { get; set; } // SkillLine.Id
 
-        public int ItemPetFood { get; set; }  // ItemPetFood.id
+        public int ItemPetFoodMask { get; set; }  // ItemPetFood.id
 
         public int PetTalentType { get; set; } // ?
 

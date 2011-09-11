@@ -6,6 +6,8 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
     [ContractVerification(false)]
     public sealed class CreatureDisplayInfoExtraRecordRecord : IClientDbRecord
     {
+        // Verified in 14545
+
         public int Id { get; set; }
 
         public Race Race { get; set; }
@@ -41,6 +43,8 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
         public int Gloves { get; set; } // ItemDisplayInfo.Id
 
         public int Wrists { get; set; } // ItemDisplayInfo.Id
+
+        public int Cape { get; set; } // ItemDisplayInfo.Id
 
         [RealType(typeof(int))]
         public bool CanEquipOther { get; set; }

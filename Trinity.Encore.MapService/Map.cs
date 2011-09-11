@@ -30,12 +30,12 @@ namespace Trinity.Encore.MapService
         /// <param name="timeDiff">Time in ms since last call to this function</param>
         public void Update(int timeDiff)
         {
-            // Execute scheduled update routines
+            /*// Execute scheduled update routines
             foreach (var worldEntity in _entityQuadTree.FindEntities(x => !x.Node.IsEmpty).Cast<WorldEntity>())
             {
                 Contract.Assume(worldEntity != null);
                 worldEntity.PostAsync(() => worldEntity.Update(timeDiff));
-            }
+            }*/
         }
 
         /// <summary>

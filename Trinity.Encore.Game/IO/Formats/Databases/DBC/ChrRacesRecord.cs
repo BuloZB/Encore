@@ -6,6 +6,8 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
     [ContractVerification(false)]
     public sealed class ChrRacesRecord : IClientDbRecord
     {
+        // Verified in 14545
+
         public int Id { get; set; }
 
         public RaceFlags Flags { get; set; }
@@ -57,6 +59,11 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
             public string FacialHair2 { get; set; }
 
             public string Hair { get; set; }
+        }
+
+        public int GetMask() // Used in DanceMoves.Racemask
+        {
+            return 1 << Id - 1; // (int)Math.Pow(2.0, Id - 1.0);
         }
 
     }

@@ -201,6 +201,7 @@
     <Compile Include="IO\Formats\Databases\DBC\CinematicCameraRecord.cs" />
     <Compile Include="IO\Formats\Databases\DBC\CinematicSequenceRecord.cs" />
     <Compile Include="IO\Formats\Databases\DBC\AnimKitPriorityRecord.cs" />
+    <Compile Include="IO\Formats\Databases\DBC\DanceMovesRecord.cs" />
     <Compile Include="IO\Formats\Databases\DBC\CreatureFamilyRecord.cs" />
     <Compile Include="IO\Formats\Databases\DBC\CreatureDisplayInfoExtraRecord.cs" />
     <Compile Include="IO\Formats\Databases\DBC\CreatureDisplayInfoRecord.cs" />
@@ -208,6 +209,15 @@
     <Compile Include="IO\Formats\Databases\DBC\CreatureModelDataRecord.cs" />
     <Compile Include="IO\Formats\Databases\DBC\CreatureMovementInfoRecord.cs" />
     <Compile Include="IO\Formats\Databases\DBC\CreatureSoundDataRecord.cs" />
+    <Compile Include="IO\Formats\Databases\DBC\CreatureSpellDataRecord.cs" />
+    <Compile Include="IO\Formats\Databases\DBC\CreatureTypeRecord.cs" />
+    <Compile Include="IO\Formats\Databases\DBC\CurrencyCategoryRecord.cs" />
+    <Compile Include="IO\Formats\Databases\DBC\CurrencyTypesRecord.cs" />
+    <Compile Include="IO\Formats\Databases\DBC\DeathThudLookupsRecord.cs" />
+    <Compile Include="IO\Formats\Databases\DBC\DeclinedWordCasesRecord.cs" />
+    <Compile Include="IO\Formats\Databases\DBC\DeclinedWordRecord.cs" />
+    <Compile Include="IO\Formats\Databases\DBC\DestructibleModelDataRecord.cs" />
+    <Compile Include="IO\Formats\Databases\DBC\DungeonEncounterRecord.cs" />
     <Compile Include="IO\Formats\Databases\DBC\ItemPetFoodRecord.cs" />
     <Compile Include="IO\Formats\Databases\DBC\WorldStateUIRecord.cs" />
     <Compile Include="IO\Formats\Databases\DBC\GTSpellScalingRecord.cs" />

@@ -5,6 +5,8 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
     [ContractVerification(false)]
     public sealed class CreatureDisplayInfoRecord : IClientDbRecord
     {
+        // Verified in 14545
+
         public int Id { get; set; }
 
         public int Model { get; set; } // CreatureModelData.Id

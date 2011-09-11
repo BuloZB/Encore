@@ -6,8 +6,6 @@ namespace Trinity.Encore.Game.Entities.Unit
     [Flags]
     public enum ClassFlags : uint
     {
-        // TODO: enum: 2 cloth, 4 summonpet, 8 userelicslot, 16 mail, 32 plate..
-
         CanWearCloth = 0x002, // Rogue, Priest, Mage, Druid, Shaman, Warrior, Paladin, DK, Warlock
         CanSummonPet = 0x004, // Warlock, Hunter
         UsesRelicSlot = 0x008, // Druid, Shaman, Paladin, DK
