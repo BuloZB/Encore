@@ -17,6 +17,7 @@ namespace Trinity.Encore.Game.Entities.Unit
         Shaman = 7,
         Mage = 8,
         Warlock = 9,
+        Unused = 10,
         Druid = 11,
     }
 }

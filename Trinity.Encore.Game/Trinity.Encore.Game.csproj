@@ -218,6 +218,10 @@
     <Compile Include="IO\Formats\Databases\DBC\DeclinedWordRecord.cs" />
     <Compile Include="IO\Formats\Databases\DBC\DestructibleModelDataRecord.cs" />
     <Compile Include="IO\Formats\Databases\DBC\DungeonEncounterRecord.cs" />
+    <Compile Include="IO\Formats\Databases\DBC\DungeonMapChunkRecord.cs" />
+    <Compile Include="IO\Formats\Databases\DBC\DungeonMapRecord.cs" />
+    <Compile Include="IO\Formats\Databases\DBC\DurabilityCostsRecord.cs" />
+    <Compile Include="IO\Formats\Databases\DBC\DurabilityQualityRecord.cs" />
     <Compile Include="IO\Formats\Databases\DBC\ItemPetFoodRecord.cs" />
     <Compile Include="IO\Formats\Databases\DBC\WorldStateUIRecord.cs" />
     <Compile Include="IO\Formats\Databases\DBC\GTSpellScalingRecord.cs" />

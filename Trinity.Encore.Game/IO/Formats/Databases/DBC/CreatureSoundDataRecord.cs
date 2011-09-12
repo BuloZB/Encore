@@ -59,9 +59,9 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
 
         public int CreatureImpactType { get; set; } // ?
 
-        public int SoundJumpStartId { get; set; } // SoundEntries.Id
+        public int SoundJumpstartId { get; set; } // SoundEntries.Id
 
-        public int SoundJumpEndId { get; set; } // SoundEntries.Id
+        public int SoundJumpendId { get; set; } // SoundEntries.Id
 
         public int SoundPetAttackId { get; set; } // SoundEntries.Id
 

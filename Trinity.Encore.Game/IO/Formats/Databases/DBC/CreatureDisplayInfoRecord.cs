@@ -46,10 +46,7 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
         [SkipProperty]
         public float OpacityPercent
         {
-            get
-            {
-                return Opacity * (float)(100/byte.MaxValue);
-            }
+            get { return Opacity * (float)(100/byte.MaxValue); }
         }
     }
 }

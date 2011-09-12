@@ -14,9 +14,10 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
         [RealType(typeof(int))]
         public bool RewardsNoExperience { get; set; }
 
-        public int GetMask() // Used in Spell
+        [SkipProperty]
+        public int RaceMask // Used in Spell
         {
-            return 1 << Id - 1; // (int)Math.Pow(2.0, Id - 1.0);
+            get { return 1 << Id - 1; }
         }
     }
 }

@@ -61,10 +61,10 @@ namespace Trinity.Encore.Game.IO.Formats.Databases.DBC
             public string Hair { get; set; }
         }
 
-        public int GetMask() // Used in DanceMoves.Racemask
+        [SkipProperty]
+        public int RaceMask // Used in DanceMoves.RaceMask
         {
-            return 1 << Id - 1; // (int)Math.Pow(2.0, Id - 1.0);
+            get { return 1 << Id - 1; }
         }
-
     }
 }
